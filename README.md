@@ -32,5 +32,5 @@ output this program is capable of.
 ### Additional resources
 
 I wrote a small bit about this project on my Wordpress blog. You can
-find the article here
+find the article here:
 [Image Processing in C++](http://ericscrosson.wordpress.com/2012/12/24/image-processing-in-cpp/)
