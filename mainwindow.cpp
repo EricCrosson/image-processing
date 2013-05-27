@@ -1,4 +1,3 @@
-#include <QtGui/QApplication>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
@@ -29,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qimageFromPixelVector(modifiedImg, image->width(),
 				  image->height(), image->format());
 
-    QString savepath = "/home/eric/Dropbox/cells/images/log.jpg";
+    QString savepath = "/home/eric/Dropbox/cells/images/output.jpg";
     image->save(savepath);
     displayImage(savepath);
 }
@@ -45,7 +44,7 @@ MainWindow::convolveImage(QImage* img, QVector<double> kernel, short kernel_size
     QVector<QRgb> retvec(0);
 
     qDebug() << "Length of image vector:" << len;
-    
+
     for(int i = 0; i < len; ++i) // perform the convolution
     {
 	retvec.append(convolveImageAtPixel(imvec, width,
@@ -68,7 +67,7 @@ MainWindow::convolveImageAtPixel(QVector<QRgb> img, short img_width,
     for(int ky = 0; ky < kernel_size; ++ky)
     {
 	y = center/img_width - kernel_size/2 + ky;
-	int kColFromY = kernel_size * ky; 
+	int kColFromY = kernel_size * ky;
 	int imgColFromY = img_width * y; // only calculate when new
 
 	for(int kx = 0; kx < kernel_size; ++kx)
@@ -94,7 +93,7 @@ MainWindow::qimageFromPixelVector(QVector<QRgb> imgvec, short width,
     (void)format;
     int len = width * height;
     QImage* img = image;
-    
+
     for(int i = 0; i < len; ++i)
     {
 	img->setPixel(i%width, i/width, imgvec[i]);
@@ -144,7 +143,7 @@ MainWindow::normalizeMatrix(QVector<double> k, short size)
 
     for(short i = 0; i < len; ++i) // Then, adjust each term
 	k[i] = k[i]/max;
-    
+
     return k;
 }
 
@@ -165,7 +164,7 @@ MainWindow::printStatsAboutMatrix(QVector<double> k, short size)
     double neg = negOfMatrix(k, size);
     double pos = posOfMatrix(k, size);
     double max = maxOfMatrix(k, size);
-    double sum = sumOfMatrix(k, size); 
+    double sum = sumOfMatrix(k, size);
     qDebug() << "Sum of matrix:\t" << sum
 	     << "\nMaximum value:\t" << max
 	     << "\nNegative values:" << neg
@@ -199,7 +198,7 @@ MainWindow::laplacianOfGaussian(short size, short i)
     // short x = i%size, y = i/size;
     short x = qAbs(i%size - size/2);
     short y = qAbs(i/size - size/2);
-    // double frac = -((double) (qPow(x,2) + qPow(y,2))) / 
+    // double frac = -((double) (qPow(x,2) + qPow(y,2))) /
     // 	((double) (2*qPow(MainWindow::sigma,2)));
     // double tmp = -1/(MainWindow::PI*qPow(MainWindow::sigma, 4)) *
     // 	(1+frac) * qExp(frac);
@@ -274,7 +273,7 @@ MainWindow::printMatrix(QVector<double> k, short size)
 }
 
 void
-MainWindow::displayImage(QString imgPath) 
+MainWindow::displayImage(QString imgPath)
 {
     displayPane->setPixmap( QPixmap(imgPath) );
 }
@@ -282,9 +281,6 @@ MainWindow::displayImage(QString imgPath)
 void
 MainWindow::loadImage()
 {
-    // imagePath = QFileDialog::getOpenFileName(
-    // 	this, tr("Open Image"), "/home/eric/Dropbox/cells/images", 
-    // 	tr("Image files (*.bmp *.jpg)"));
     imagePath = "/home/eric/Dropbox/cells/images/first.jpg";
 
     displayImage(imagePath);
@@ -300,13 +296,13 @@ MainWindow::setupGraphicalInterface(bool enableButtons)
 
     imageControlBox = new QVBoxLayout;
     mainLayout->addLayout(imageControlBox);
-    
+
     image = new QImage();
     displayPane = new QLabel();
     displayBox =  new QVBoxLayout;
     displayBox->addWidget(displayPane);
     mainLayout->addLayout(displayBox);
-    
+
     loadBitMapButton = new QPushButton("Load &bmp", this);
     loadBitMapButton->setEnabled(enableButtons);
     connect(loadBitMapButton, SIGNAL(clicked()),
@@ -315,7 +311,7 @@ MainWindow::setupGraphicalInterface(bool enableButtons)
 
     displayBitMapButton = new QPushButton("Display bmp", this);
     displayBitMapButton->setEnabled(enableButtons);
-    connect(displayBitMapButton, SIGNAL(clicked()), 
+    connect(displayBitMapButton, SIGNAL(clicked()),
 	    this, SLOT(loadImage()));
     imageControlBox->addWidget(displayBitMapButton);
 

@@ -1,1 +1,8 @@
 *.pro.user*
+/FilterClient
+/Makefile
+/main.o
+/mainwindow.o
+/moc_mainwindow.cpp
+/moc_mainwindow.o
+/ui_mainwindow.h
