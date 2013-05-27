@@ -9,7 +9,7 @@ edge-detecting Laplacian filter.
 ## How to get started
 
 Browsing through the code is the best way to get a feel for this
-project. It's short, and sweet. Dive right in to `mainwindow.cpp'!
+project. It's short, and sweet. Dive right in to `mainwindow.cpp`!
 
 ## Compilation instructions
 
