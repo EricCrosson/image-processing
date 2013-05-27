@@ -33,4 +33,4 @@ output this program is capable of.
 
 I wrote a small bit about this project on my Wordpress blog. You can
 find the article here
-![http://ericscrosson.wordpress.com/2012/12/24/image-processing-in-cpp/](Image Processing in C++)
+[http://ericscrosson.wordpress.com/2012/12/24/image-processing-in-cpp/](Image Processing in C++)
