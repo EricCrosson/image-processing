@@ -1,3 +1,19 @@
+// An application to spatially process images.
+// Copyright (C) 2013 Eric Crosson
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -22,12 +38,12 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
 public:
     /* Qt defined */
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
 public slots:
     /* Use this function to load an image into the QImage */
     void loadImage();
@@ -43,9 +59,9 @@ private:
     void printMatrix(QVector<double> k, short size);
     void printStatsAboutMatrix(QVector<double> k, short size);
 
-    /* These functions return a modified matrix 
-     * Caution- they do not generate a matrix whose sum of 
-     *          numbers is equal to one. 
+    /* These functions return a modified matrix
+     * Caution- they do not generate a matrix whose sum of
+     *          numbers is equal to one.
      */
     QVector<double> generateKernel(short side);
     QVector<double> normalizeMatrix(QVector<double> k, short size);
@@ -71,7 +87,7 @@ private:
     double posOfMatrix(QVector<double> k, short size);
     double negOfMatrix(QVector<double> k, short size);
     double maxOfMatrix(QVector<double> k, short size);
-    
+
     /* private variables */
     Ui::MainWindow *ui;
 
@@ -83,11 +99,11 @@ private:
     /* The image to work with */
     QImage *image;
     QString imagePath;
-    
+
     /* The display area for the image of interest */
     QLabel *displayPane;
 
-    /** 
+    /**
      * This is the kernel used to apply image filters.
      * All double-arrays or matrices are going to be stored in a
      * single list format in a QVector<int>. This means items are
@@ -95,7 +111,7 @@ private:
      * (x, y)     becomes  ==>   kernel[width*y + x]
      *            and, conversely
      * kernel[i]  becomes  ==>   (i%width, i/width)
-     * 
+     *
      * These can be centered around the matrix's "origin" with the
      * following scheme:
      * kernel[i]  becomes  ==>   (abs(i%size - size/2), abs(i/size - size/2))
